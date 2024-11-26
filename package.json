@@ -1,0 +1,19 @@
+{
+    "name": "api-game-project",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node --watch ./bin/www"
+    },
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "cookie-parser": "^1.4.7",
+        "crypto": "^1.0.1",
+        "debug": "^4.3.7",
+        "express": "^4.21.1",
+        "fs": "^0.0.1-security",
+        "hal": "^1.2.0",
+        "jsonwebtoken": "^9.0.2",
+        "morgan": "^1.10.0"
+    }
+}
