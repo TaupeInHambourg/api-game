@@ -54,5 +54,4 @@ function mapCluesListToRessourceObject(clueData) {
     }
 }
 
-
 module.exports = { halLinkObject, mapCluetoResourceObject, mapCluesListToRessourceObject };
