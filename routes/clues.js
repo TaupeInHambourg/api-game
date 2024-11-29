@@ -6,7 +6,7 @@ var hal = require('../hal');
 /* GET clues page. */
 router.get('/clues', function(req, res, next) {
   //TODO : a propos de quoi souhaitez vous un indice ? /gps, /grinchbyte......
-  res.status(200).send(`A propos de quel sujet souhaitez vous un indice ? -gps -grinchbyte -santa`)
+  res.status(200).send(`A propos de quel sujet souhaitez vous un indice ? -gps -grinchbyte`)
 });
 
 router.get('/clues/:name', function(req, res, next) {

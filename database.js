@@ -44,7 +44,7 @@ const navigations = [
     ),
     new Navigation(
         3,
-        new Date(2024,01,15,20,0,0),
+        new Date(2024,1,15,20,0,0),
         "Los Angeles",
         "A-SOUL",
         "Navigation virtuel du célèbre groupe chinois de virtual idols, A-SOUL.",
@@ -52,7 +52,7 @@ const navigations = [
     ),
     new Navigation(
         4,
-        new Date(2024,02,20,21,0,0),
+        new Date(2024,2,20,21,0,0),
         "New York",
         "Evelynn",
         "Spectacle immersif avec Evelynn, l'idol virtuelle de K/DA.",
@@ -109,15 +109,17 @@ const navigations = [
 ];
 
 const users = [
-    new User(1, "Santa", "Xmas", true),
+    new User(1, "Santa", "Xmas", false),
     new User(2, "Snow", "niceTry", false),
-    new User(3, "GrinchByte", "a", false)
+    new User(3, "GrinchByte", "Noel24", true)
 ];
 
 const clues = [
-    new Clue(1, "gps", "Le GPS est compromis"),
+    new Clue(1, "gps", "GrinchByte semble avoir vérouillé le GPS, vous y connecter en administrateur devrait vous permettre de le déverouiller"),
     new Clue(2, "grinchbyte", "Il semble que GrinchByte soit un habitué des lieux. Il savait comment bloqué la distribution des cadeux et comment atteindre le traineau."),
-    new Clue(3, "santa", "Le père Noël vous dit avoir un accès administrateur, mais il a perdu le mot de passe depuis longtemps... Vous pourrez sûrement le retrouver")
+    new Clue(3, "pere-noel", "Le père Noël vous dit avoir un accès administrateur, mais il a perdu le mot de passe depuis longtemps... Vous pourrez sûrement le retrouver"),
+    new Clue(4, "deverouiller", "Avez-vous essayé /unlock ?"),
+    new Clue(5, "connexion", "")
 ];
 
 //* Export des collections
