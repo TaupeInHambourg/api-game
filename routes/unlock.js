@@ -7,50 +7,72 @@ var jwt = require('../jwt');
 
 
 /**
-* @param {} login
-* @param {*} password
+* @param {} culprit
+* @param {*} message
 * @returnsbcrypt
 */
 
-function authenticate(login, password) {
-    const user = db.users.find((user) => {
-        return user.pseudo === login && bcrypt.compareSync(password, user.password);
+function identify(culprit, message) {
+    const user = db.suspects.find((suspect) => {
+        return suspect.name === culprit;
+    });
+
+    const key = db.codes.find((code) => {
+        return code.key === message;
     });
 
     if (user === undefined) return false;
 
+    if (key === undefined) return false;
+
     return true;
 }
 
-function findUserByPseudo(pseudo){
-    return db.users.find(user=>user.pseudo === pseudo);
+function findSuspectByName(name){
+    return db.suspects.find(suspect=>suspect.name === name);
+}
+function findCodeByKey(key){
+    return db.codes.find(code=>code.key === key);
 }
 
 /**
-* @param {} pseudo
+* @param {} name
+* @param {} key
 * @returns
 */
 
-function isAdmin(pseudo){
-    const user = findUserByPseudo(pseudo);
-    return user && user.isAdmin;
+function isGuilty(name){
+    const suspect = findSuspectByName(name);
+    return suspect && suspect.isGuilty;
+}
+function isRepair(key){
+    const code = findCodeByKey(key);
+    return code && code.isWorking;
 }
 
-router.post('/unlock', function(req, res, next){
-    const password = req.body.password;
-    const login = req.body.login;
+router.get('/unlock', function(req, res, next){
+    res.status(200).send(`Trouvez le coupable et le message caché pour obtenir le code de réparation du GPS`);
+})
 
-    if (!password || !login){
-        res.status(400).send("Identifiants introuvables.");
+router.post('/unlock', function(req, res, next){
+    const code = req.body.message;
+    const suspect = req.body.culprit;
+
+    if (!code || !suspect){
+        res.status(400).send("Code de réparation ou suspect introuvable(s).");
         return
     }
 
-    if(authenticate(login, password)){
+    if(identify(suspect, code)){
 
-        if(!isAdmin(login, password)){
-            res.status(401).send("GrinchByte- 'Hehehe, vous n'êtes plus administrateur, pensiez vous que ce serait si simple ?!'")
+        if(!isGuilty(suspect)){
+            res.status(401).send(`Erreur : ${suspect} n'est pas le coupable !`)
         }
-        const accessToken = jwt.createJWT(password, true, '1 day');
+        if(!isRepair(code)){
+            res.status(401).send(`Erreur : ${code} n'est pas le code de réparation !`)
+        }
+
+        const accessToken = jwt.createJWT(code, true, '1 day');
 
         let responseObject = {
             "_links": [{
@@ -58,7 +80,8 @@ router.post('/unlock', function(req, res, next){
                 "navigation": hal.halLinkObject(`/gps`, 'string', '', true)
             }],
             jwt: accessToken,
-            message: `Bienvenue ${login} !`,
+            message: `Bravo ! Le coupable était bien ${suspect} !
+            Heureusement que vous avez trouvé le code caché '${code}', vous pouvez maintenant réparer le système de navigation du traineau !`,
         }
         res.status(200).format({
             'application/hal+json': function(){

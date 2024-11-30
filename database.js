@@ -3,22 +3,36 @@ var bcrypt = require('bcrypt');
 //* Déclaration des classes
 
 class Navigation {
-    constructor(id, date, location, artist, description, seats){
+    constructor(id, location, name, description, isKind){
         this.id = id;
-        this.date = date;
         this.location = location;
-        this.artist = artist;
+        this.name = name;
         this.description = description;
-        this.seats = seats;
+        this.isKind = isKind;
     }
 }
 
-class User {
-    constructor(id, pseudo, password, isAdmin){
+class Suspect {
+    constructor(id, name, isGuilty){
         this.id = id;
-        this.pseudo = pseudo;
-        this.password = bcrypt.hashSync(password, 5);
-        this.isAdmin = isAdmin;
+        this.name = name;
+        this.isGuilty = isGuilty;
+    }
+}
+
+class Code {
+    constructor(id, key, isWorking){
+        this.id = id;
+        this.key = bcrypt.hashSync(key, 5);
+        this.isWorking = isWorking;
+    }
+}
+
+class Invastigate {
+    constructor(id, question, response){
+        this.id = id;
+        this.question = question;
+        this.response = response;
     }
 }
 
@@ -33,94 +47,41 @@ class Clue {
 //* Définition des collections
 
 const navigations = [
-    new Navigation(1,new Date(2023, 11, 15, 19, 0, 0),"Tokyo","Hatsune Miku","Navigation holographique de Hatsune Miku, l'idol virtuelle emblématique du Japon.",25000),
-    new Navigation(
-        2,
-        new Date(2023,12,5,18,30,0),
-        "Séoul",
-        "K/DA",
-        "Performance live de K/DA, le groupe de K-pop virtuel inspiré de League of Legends.",
-        40000
-    ),
-    new Navigation(
-        3,
-        new Date(2024,1,15,20,0,0),
-        "Los Angeles",
-        "A-SOUL",
-        "Navigation virtuel du célèbre groupe chinois de virtual idols, A-SOUL.",
-        30000
-    ),
-    new Navigation(
-        4,
-        new Date(2024,2,20,21,0,0),
-        "New York",
-        "Evelynn",
-        "Spectacle immersif avec Evelynn, l'idol virtuelle de K/DA.",
-        18000
-    ),
-    new Navigation(
-        5,
-        new Date(2024,3,18,19,45,0),
-        "Londres",
-        "Vocaloid All Stars",
-        "Une collaboration unique d'idols Vocaloid pour un Navigation à Londres.",
-        22000
-    ),
-    new Navigation(
-        6,
-        new Date(2024,4,12,20,30,0),
-        "Paris",
-        "Lil Miquela",
-        "Lil Miquela, influenceuse virtuelle, en live à Paris.",
-        15000
-    ),
-    new Navigation(
-        7,
-        new Date(2024,5,20,19,15,0),
-        "Berlin",
-        "Kizuna AI",
-        "La pionnière des YouTubeurs virtuels, Kizuna AI, en Navigation pour ses fans européens.",
-        27000
-    ),
-    new Navigation(
-        8,
-        new Date(2024,6,25,20,0,0),
-        "Shanghai",
-        "Luo Tianyi",
-        "Navigation en hologramme de Luo Tianyi, l'idol virtuelle populaire en Chine.",
-        35000
-    ),
-    new Navigation(
-        9,
-        new Date(2024,7,30,21,0,0),
-        "Bangkok",
-        "Yukari Yuzuki",
-        "Yukari Yuzuki, la vocaloid japonaise, en performance live en Thaïlande.",
-        20000
-    ),
-    new Navigation(
-        10,
-        new Date(2024,8,15,18,0,0),
-        "San Francisco",
-        "Projekt Melody",
-        "Projekt Melody, la star virtuelle de Twitch, en Navigation pour ses fans américains.",
-        10000
-    )
+    new Navigation(1, "Brumeciel", "Michel Dupont", "Laisse toujours un cookie", true),
+    new Navigation(2, "Rochelande", "Sabrina Smith", "Se moque de ses amis", false),
+    new Navigation(3, "Lunebourg", "Jean Martin", "Aide toujours ses voisins", true),
+    new Navigation(4, "Verteval", "Claire Dubois", "Aime critiquer les autres", false),
+    new Navigation(5, "Florebourg", "Paul Durant", "Rend service sans attendre", true),
+    new Navigation(6, "Dorenville", "Amélie Petit", "Chante toujours en marchant", true),
+    new Navigation(7, "Oriville", "Jacques Bernard", "Ne partage jamais ses affaires", false),
+    new Navigation(8, "Nebulis", "Sophie Lemoine", "Apprend rapidement de nouvelles choses", true),
+    new Navigation(9, "Cielval", "Marc Lefèvre", "Raconte des histoires drôles", true),
+    new Navigation(10, "Vallune", "Emma Caron", "Interrompt constamment les autres", false)
 ];
 
-const users = [
-    new User(1, "Santa", "Xmas", false),
-    new User(2, "Snow", "niceTry", false),
-    new User(3, "GrinchByte", "Noel24", true)
+const suspects = [
+    new Suspect(1, "Santa", false),
+    new Suspect(2, "Snow", false),
+    new Suspect(3, "Grinch", true)
 ];
+
+const codes = [
+    new Code(1, "Noel24", true),
+    new Code(2, "Xmas", false),
+    new Code(3, "Noel", false)
+];
+
+const investigations = [
+    new Invastigate(1, "Qui pensez vous être le coupable ?", "Mmmmh, je ne sais pas..."),
+]
 
 const clues = [
     new Clue(1, "gps", "GrinchByte semble avoir vérouillé le GPS, vous y connecter en administrateur devrait vous permettre de le déverouiller"),
-    new Clue(2, "grinchbyte", "Il semble que GrinchByte soit un habitué des lieux. Il savait comment bloqué la distribution des cadeux et comment atteindre le traineau."),
+    new Clue(2, "coupable", "Il semble que le coupable soit un habitué des lieux. Il savait comment bloqué la distribution des cadeux et comment atteindre le traineau."),
     new Clue(3, "pere-noel", "Le père Noël vous dit avoir un accès administrateur, mais il a perdu le mot de passe depuis longtemps... Vous pourrez sûrement le retrouver"),
     new Clue(4, "deverouiller", "Avez-vous essayé /unlock ?"),
     new Clue(5, "connexion", "")
 ];
 
 //* Export des collections
-module.exports = {navigations, users, clues};
+module.exports = {navigations, suspects, codes, clues};
