@@ -84,4 +84,4 @@ const clues = [
 ];
 
 //* Export des collections
-module.exports = {navigations, suspects, codes, clues};
+module.exports = {navigations, suspects, codes, investigations, clues};

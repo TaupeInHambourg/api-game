@@ -7,21 +7,19 @@ var jwt = require('../jwt');
 
 
 /**
-* @param {} culprit
+* @param {} suspect
 * @param {*} message
 * @returnsbcrypt
 */
 
-function identify(culprit, message) {
-    const user = db.suspects.find((suspect) => {
-        return suspect.name === culprit;
+function identify(suspect, message) {
+    const some_guy = db.suspects.find((some_guy) => {
+        return some_guy.name === suspect;
     });
-
     const key = db.codes.find((code) => {
-        return code.key === message;
+        return bcrypt.compareSync(message, code.key);
     });
-
-    if (user === undefined) return false;
+    if (some_guy === undefined) return false;
 
     if (key === undefined) return false;
 
@@ -32,7 +30,9 @@ function findSuspectByName(name){
     return db.suspects.find(suspect=>suspect.name === name);
 }
 function findCodeByKey(key){
-    return db.codes.find(code=>code.key === key);
+    return  db.codes.find((code) => {
+        return bcrypt.compareSync(key, code.key);
+    });
 }
 
 /**
@@ -46,7 +46,9 @@ function isGuilty(name){
     return suspect && suspect.isGuilty;
 }
 function isRepair(key){
+    console.log('isRepair ',key);
     const code = findCodeByKey(key);
+    console.log('findCodeByKey is find ',code);
     return code && code.isWorking;
 }
 
@@ -56,15 +58,13 @@ router.get('/unlock', function(req, res, next){
 
 router.post('/unlock', function(req, res, next){
     const code = req.body.message;
-    const suspect = req.body.culprit;
+    const suspect = req.body.suspect;
 
     if (!code || !suspect){
         res.status(400).send("Code de réparation ou suspect introuvable(s).");
         return
     }
-
     if(identify(suspect, code)){
-
         if(!isGuilty(suspect)){
             res.status(401).send(`Erreur : ${suspect} n'est pas le coupable !`)
         }
@@ -80,14 +80,16 @@ router.post('/unlock', function(req, res, next){
                 "navigation": hal.halLinkObject(`/gps`, 'string', '', true)
             }],
             jwt: accessToken,
-            message: `Bravo ! Le coupable était bien ${suspect} !
-            Heureusement que vous avez trouvé le code caché '${code}', vous pouvez maintenant réparer le système de navigation du traineau !`,
+            message: `Bravo ! Le coupable était bien ${suspect}! Heureusement que vous avez trouvé le code caché '${code}', vous pouvez maintenant réparer le système de navigation du traineau !`,
         }
         res.status(200).format({
             'application/hal+json': function(){
                 res.send(responseObject);
             }
         })
+    }
+    else{
+        res.status(403).send('Mauvais code de réparation ou suspect.')
     }
 });
 

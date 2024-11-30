@@ -31,7 +31,7 @@ function halLinkObject(url, type = '', name = '', templated = false, deprecation
 function mapCluetoResourceObject(clueData, baseURL) {
     return {
         "_links": [{
-            "self": halLinkObject(`/clues/${clueData.id}`),
+            "self": halLinkObject(`/clues/${clueData.name}`),
             "clues": halLinkObject('/clues'),
         }],
         name: clueData.name,

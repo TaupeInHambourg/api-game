@@ -30,7 +30,7 @@ curl localhost:3000
 ##  2. <a name='Conception'></a>Conception
 ###  2.1. <a name='Dictionnairededonnes'></a>Dictionnaire de données
 | Code | Libellé | Type | Obligatoire ? | Remarque et contraintes |
-|---------------|---------------------------|--------|---------------|----------------------------------------------|
+|---------------|---------------------------|--------|---------------------------|----------------------------------------------|
 | navigation_id | Identifiant | N | Oui | UNIQUE, utilisé pour identifier une navigation |
 | location | Nom de la ville de l'enfant | A | Oui | |
 | name | Nom de l'enfant | A | Oui | |
@@ -54,8 +54,7 @@ curl localhost:3000
 |------------------|----------------------|--------------|---------------------------------|--------------------------------|
 | Liste des données du gps | `/gps` | GET, HEAD, OPTION | | Page protégée : affiche les données si le coupable et le message caché ont été trouvés |
 | Liste des premiers indices | `/clues` | GET, HEAD, OPTION | | |
-| Affiche le contenu d'un indice | `/clues/{name}` | GET, HEAD, OPTION | `:name` = nom d'un indice | |
-| Supprime un indice | `/clues/{id}` | DELETE, HEAD, OPTION | `:id` = id d'un indice |  |
+| Supprime ou affiche le contenu d'un indice | `/clues/{name}` | GET, DELETE, HEAD, OPTION | `:name` = nom d'un indice | |
 | Permet à l'utilisateur de proposer un coupable et le message caché pour débloquer le traineau | `/unlock` | POST, HEAD, OPTION | `{ coupable, message }` = nom d'un coupable et contenu d'un message | Si les conditions sont rénuies, envoie un JWT qui permettra à l'utilisateur de débloquer le traineau |
 | Permet à l'utilisateur de s'adresser à un personnage | `/investigate/{pnj}` | GET, HEAD, OPTION | `:pnj` = nom d'un personnage | |
 | Permet à l'utilisateur de poser une question | `/investigate/{pnj}/{id}` | GET, HEAD, OPTION | `:pnj` `:id` = nom d'un personnage et id d'une question | |
