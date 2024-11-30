@@ -65,7 +65,7 @@ L'API est sécurisée
 ##  4. <a name='Remarques'></a>Remarques
 
 ##  5. <a name='Rfrences'></a>Références
-[ExpressJS](https://expressjs.com/en/)
-[MDN web docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
-[Geeks for geeks](https://www.geeksforgeeks.org/)
-[Stack overflow](https://stackoverflow.com/)
+[ExpressJS](https://expressjs.com/en/) \
+[MDN web docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs) \
+[Geeks for geeks](https://www.geeksforgeeks.org/) \
+[Stack overflow](https://stackoverflow.com/) \
