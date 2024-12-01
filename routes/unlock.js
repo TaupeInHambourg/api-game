@@ -13,21 +13,21 @@ var jwt = require('../jwt');
 */
 
 function identify(suspect, message) {
-    const some_guy = db.suspects.find((some_guy) => {
+    const some_guy = db.personnages.find((some_guy) => {
         return some_guy.name === suspect;
     });
     const key = db.codes.find((code) => {
         return bcrypt.compareSync(message, code.key);
     });
-    if (some_guy === undefined) return false;
 
+    if (some_guy === undefined) return false;
     if (key === undefined) return false;
 
     return true;
 }
 
 function findSuspectByName(name){
-    return db.suspects.find(suspect=>suspect.name === name);
+    return db.personnages.find(suspect=>suspect.name === name);
 }
 function findCodeByKey(key){
     return  db.codes.find((code) => {
@@ -79,8 +79,8 @@ router.post('/unlock', function(req, res, next){
                 "self": hal.halLinkObject('/unlock'),
                 "navigation": hal.halLinkObject(`/gps`, 'string', '', true)
             }],
-            jwt: accessToken,
-            message: `Bravo ! Le coupable était bien ${suspect}! Heureusement que vous avez trouvé le code caché '${code}', vous pouvez maintenant réparer le système de navigation du traineau !`,
+            code: accessToken,
+            message: `Bravo ! Le coupable était bien ${suspect}! Heureusement que vous avez trouvé le message caché '${code}', vous avez maintenant le code pour réparer le système de navigation du traineau !`,
         }
         res.status(200).format({
             'application/hal+json': function(){
@@ -89,7 +89,7 @@ router.post('/unlock', function(req, res, next){
         })
     }
     else{
-        res.status(403).send('Mauvais code de réparation ou suspect.')
+        res.status(403).send('Mauvais message ou suspect.')
     }
 });
 

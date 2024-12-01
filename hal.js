@@ -39,19 +39,54 @@ function mapCluetoResourceObject(clueData, baseURL) {
     }
 }
 
-function mapCluesListToRessourceObject(clueData) {
-
-    const embedded = clueData.map( clueData => mapCluesListToRessourceObject(clueData))
+/**
+ * Retourne une représentation Ressource Object (HAL) d'un indice
+ * @param {*} investigateData Données brutes d'un indice
+ * @returns un Ressource Object Clue (spec HAL)
+ */
+function mapInvestigationResourceObject(investigationData) {
+    return {
+        "_links": {
+            "self": halLinkObject(`/investigate/${investigationData.id_pnj}/${investigationData.subject}`),
+            "investigate": halLinkObject(`/investigate`),
+        },
+        subject: investigationData.subject,
+    };
+}
+function mapInvestigationListToResourceObject(investigations, personnage) {
+    const embedded = investigations.map(investigation => mapInvestigationResourceObject(investigation));
 
     return {
         "_links": {
-            "self": halLinkObject('/clues')
+            "self": halLinkObject(`/investigate/${personnage.name}`),
         },
-
+        personnage: {
+            name: personnage.name,
+        },
         "_embedded": {
-            "clue": embedded,
-        }
-    }
+            "subjects": embedded,
+        },
+    };
 }
 
-module.exports = { halLinkObject, mapCluetoResourceObject, mapCluesListToRessourceObject };
+/**
+ * Retourne une représentation Ressource Object (HAL) d'un indice
+ * @param {*} questionData Données brutes d'un indice
+ * @returns un Ressource Object Clue (spec HAL)
+ */
+function mapQuestionRessourceObject(questionData){
+    return {
+        "_links": {
+            "self": halLinkObject(`/investigate/${questionData.id_pnj}/${questionData.subject}`),
+            "investigate": halLinkObject(`/investigate`),
+        },
+        subject: questionData.subject,
+        talk: {
+            question: questionData.question,
+            response: questionData.response
+        }
+    };
+}
+
+
+module.exports = { halLinkObject, mapCluetoResourceObject, mapInvestigationResourceObject, mapInvestigationListToResourceObject, mapQuestionRessourceObject };
