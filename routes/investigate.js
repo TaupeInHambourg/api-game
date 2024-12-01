@@ -5,7 +5,7 @@ var hal = require('../hal');
 
 /* GET investigate page. */
 router.get('/investigate', function(req, res, next) {
-    res.status(200).send(`Qui souhaitez-vous interroger ? -Nicolas -Gilbreth -Watson`)
+    res.status(200).send(`Le père Noël, Nicolas, s'approche de vous. C'est surement un bon point de départ pour votre enquête.`)
 });
 
 router.get('/investigate/:pnj', function(req, res, next) {
@@ -21,7 +21,14 @@ router.get('/investigate/:pnj', function(req, res, next) {
 
     const investigateRessourceObject = hal.mapInvestigationListToResourceObject(subjects, personnage);
 
-    res.status(200).json(investigateRessourceObject);
+    const filteredSubjects = investigateRessourceObject._embedded.subjects.map(subject => {
+        return {
+            href: subject._links.self.href,
+            subject: subject.subject
+        };
+    });
+
+    res.status(200).json({ message : `Sur quel sujet souaitez-vous me parler ?`, sujets : filteredSubjects });
 
 });
 

@@ -7,8 +7,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index')
 var gpsRouter = require('./routes/gps');
 var cluesRouter = require('./routes/clues');
-var unlockRouter = require('./routes/unlock');
+var accuseRouter = require('./routes/accuse');
 var investigateRouter = require('./routes/investigate');
+// var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -20,7 +21,7 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/', gpsRouter);
 app.use('/', cluesRouter);
-app.use('/', unlockRouter);
+app.use('/', accuseRouter);
 app.use('/', investigateRouter);
 
 app.use(function(req, res, next){

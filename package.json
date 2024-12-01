@@ -11,6 +11,7 @@
         "crypto": "^1.0.1",
         "debug": "^4.3.7",
         "express": "^4.21.1",
+        "express-session": "^1.18.1",
         "fs": "^0.0.1-security",
         "hal": "^1.2.0",
         "jsonwebtoken": "^9.0.2",

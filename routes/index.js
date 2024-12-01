@@ -5,9 +5,11 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
   const message = `
     La veille de Noël, un hacker a pris le contrôle du système de navigation GPS du traîneau du Père Noël, mettant en péril la livraison des cadeaux aux enfants du monde entier.
-    Le hacker n'a pas eu le temps d'effacer ses traces, vous devrez trouver une solution en fouillant dans les systèmes du traîneau.
 
-    Vous, un enquêteur spécialisé en cybersécurité, avez été appelé en urgence pour identifier le coupable et restaurer le contrôle du traîneau avant que minuit ne sonne.
+    Vous, un enquêteur spécialisé en cybersécurité, avez été appelé en urgence pour identifier le coupable et restaurer le contrôle du traîneau.
+    Pour vous aider, vous pouvez compter sur Watson, votre fidèle assistant, ainsi que sur les habitants de la Laponie qui sont prêts à vous aider.
+
+    Commencer donc par les interroger /investigate.
   `;
   res.status(200).send(message);
 });

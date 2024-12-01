@@ -18,7 +18,7 @@ const checkTokenMiddleware = (req, res, next) => {
     const token  = req.headers.authorization && extractBearerToken(req.headers.authorization);
     
     if(!token){
-        return res.status(401).json({"msg":"GrinchByte est passé par ici. Bonne chance pour déverouiller ça !"})
+        return res.status(401).json({"msg":"Le système GPS est vérouillé."})
     }
     
     //vérification du jwt

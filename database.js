@@ -20,7 +20,7 @@ class Suspect {
     }
 }
 
-class Code {
+class Message {
     constructor(id, key, isWorking){
         this.id = id;
         this.key = bcrypt.hashSync(key, 5);
@@ -70,10 +70,10 @@ const navigations = [
 ];
 
 const codes = [
-    new Code(1, "Ce Noël va être annulé !", true),
-    new Code(2, "Xmas", false),
-    new Code(3, "Il est trop tard. C'est déjà la fin.", false),
-    new Code(4, "Vive l'anti-Noel !!", false)
+    new Message(1, "Ce Noël va être annulé !", true),
+    new Message(2, "Xmas", false),
+    new Message(3, "Il est trop tard. C'est déjà la fin.", false),
+    new Message(4, "Vive l'anti-Noel", false)
 ];
 
 const personnages = [
@@ -102,24 +102,27 @@ const investigations = [
     new Investigate(13, 4, "traineau", "Qui a remarqué l'attaque en premier ?", "Nicolas. Il a d'abord remarqué le tag sur le traineau, avant de voir que le GPS était HS."),
     new Investigate(14, 4, "message", "Que signifie le message que le Père Noël vous a confié ?", "Pas grand chose, si vous voulez mon avis, ce n'est rien de plus qu'un gribouillage., il s'éloigne avant de revenir avec un petit bout de papier qu'il tend à Watson"),
     new Investigate(15, 4, "lutins", "Vous semblez accuser les lutins, est-ce que l'un d'entre eux vous parrait suspect ?", "Ah !, s'esclame-t-il, ils le sont tous, des bons à rien ! Ce n'est pas compliqué, vous pouvez les diviser en deux groupes : les lèches-bottes et les fainéants !"),
-    new Investigate(16, 5, "tag", "Voilà un tag bien étrange, qu'en pensez-vous mon ami ?", "Mon cher Snow, je crois que le coupable se joue de nous 'Ylyh o'dqwl-Qrho !!' ne me parrait pas être un message dénué de sens, il suffit de jouer un peu avec ses lettres."),
-    new Investigate(17, 5, "message", "Dites-moi que contient ce message ?", "Ma foi, c'est là une énigme que j'ai bien du mal à comprendre : 'Q2UgTm/Dq2wgdmEgw6p0cmUgYW5udWzDqSAh'."),
+    new Investigate(16, 5, "tag", "Voilà un tag bien étrange, qu'en pensez-vous mon ami ?", "Mon cher Snow, je crois que le coupable se joue de nous 'Ylyh o'dqwl-Qrho' ne me parrait pas être un message dénué de sens, il suffit de jouer un peu avec ses lettres."),
+    new Investigate(17, 5, "message", "Dites-moi que contient ce message ?", "Ma foi, c'est là une énigme que j'ai bien du mal à comprendre : 'Q2UgTm/Dq2wgdmEgw6p0cmUgYW5udWzDqQ=='."),
     new Investigate(18, 5, "coupable", "D'après vous Watson, qui est le coupable ?", "Je pense que Gilbreth a raison, c'est forcément l'un des lutins, je vais aller m'informer à ce sujet."),
     new Investigate(19, 5, "lutins", "Alors mon ami, avez-vous quelques suspects à me présenter ?", "Et comment ! Il semble d'après Gilbreth et Mary que deux lutins ont changé d'attitude à l'approche de Noël : Grinch et Gremlins ! L'un comme l'autre semble vouloir la fin de Noël. Le premier vole les cadeaux et le second les détruit."),
     new Investigate(20, 5, "grinch", "Avez-vous plus d'informations à son sujet ?", "Depuis le hack du traineau, il se réjouit de l'annulation de Noël et ne cesse de répéter en chantant 'Ce Noël va être annulé !'."),
     new Investigate(21, 5, "gremlins", "Avez-vous plus d'informations à son sujet ?", "Il ne parle pas beaucoup, mais il est très desctructeur... J'ai trouvé un petit carnet qui semble lui appartenir, il ne contient qu'un seul message 'Il est trop tard. C'est déjà la fin.'."),
-    new Investigate(22, 3, "alibi", "Pour quelle raison chantez vous cela ? Et que faisiez-vous lors de l'attaque du traineau ?", "Je déteste Noël ! Je déteste les fêtes, je déteste les décorations et je déteste ces petits humains !, c'est là la seule réponse que vous arrivez à lui tirer"),
-    new Investigate(23, 7, "alibi", "Vous vous approchez prudamment, et lui demandez ce qu'il faisait lors de l'attaque", "Occupé à dévoré un cadeau, le Gremlins ne semble pas vous entendre."),
+    new Investigate(22, 5, "indice", "Auriez-nous quelques informations de la part de notre cheffe ?", "Pas vraiment, elle a simplement mentionné /clues sans plus d'explications... Est-ce que cela vous aide ?"),
+    new Investigate(23, 5, "accusation", "Mon cher Watson, n'auriez vous pas oublié de me dire comment transmettre nos information au bureau ?", "Oh, pardon M.Snow ! Madame m'a dit qu'elle vérifierait en personne les messages provenant de /accuse."),
+    new Investigate(24, 3, "alibi", "Pour quelle raison chantez vous cela ? Et que faisiez-vous lors de l'attaque du traineau ?", "Je déteste Noël ! Je déteste les fêtes, je déteste les décorations et je déteste ces petits humains !, c'est là la seule réponse que vous arrivez à lui tirer"),
+    new Investigate(25, 7, "alibi", "Vous vous approchez prudamment, et lui demandez ce qu'il faisait lors de l'attaque", "Occupé à dévoré un cadeau, le Gremlins ne semble pas vous entendre."),
 ]
 
 const clues = [
     new Clue(1, "gps", "Le hacker semble avoir vérouillé le GPS, vous détectez cependant que le hacker s'est laissé la possibilité d'acceder au système par un code, peut-être pourrez-vous le trouver ?"),
     new Clue(2, "coupable", "Peut-être trouverez vous un lien entre les messages codés et les dires des suspects?"),
-    new Clue(3, "pere-noel", "Nicolas vous dit avoir trouvé un étrange message dans le traineau, il a confié à Gilbreth, son fidel chef des lutins, la tâche de le déchiffrer."),
-    new Clue(4, "deverouiller", "Avez-vous essayé /unlock ?"),
-    new Clue(5, "enquete", "N'hésitez pas à investiguer pour poser des questions aux personnes qui vous entourent."),
-    new Clue(6, "tag", "Décalez chaque lettre de 3 places dans l'alphabet."),
-    new Clue(7, "message", "Et-si le message reposait sur le format Base64 ?")
+    new Clue(3, "accusation", "Soumettez votre suspect et son message à /accuse."),
+    new Clue(4, "tag", "Décalez chaque lettre de 3 places dans l'alphabet."),
+    new Clue(5, "message", "Et-si le message reposait sur le format Base64 ?"),
+    new Clue(6, "message_suspect", "Le message doit être encodé au bon format UTF-8, utilisez https://www.urldecoder.org/ "),
+    new Clue(7, "reponse_message", "Le message était 'Ce Noël va être annulé !', soit : Ce%20No%C3%ABl%20va%20%C3%AAtre%20annul%C3%A9%20%21"),
+    new Clue(8, "reponse_suspect", "Le coupable était le Grinch")
 ];
 
 //* Export des collections
