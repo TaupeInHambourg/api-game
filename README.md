@@ -1,5 +1,4 @@
 # Hack du traineau du père Noël
-
 ## Sommaire
 <!-- vscode-markdown-toc -->
 * 1. [Lancer le jeu](#Lancerlejeu)
@@ -7,14 +6,14 @@
 	* 2.1. [Dictionnaire de données](#Dictionnairededonnes)
 	* 2.2. [Récapitulatif des ressources](#Rcapitulatifdesressources)
 * 3. [Remarques](#Remarques)
-* 4. [Références](#Rfrences)
+* 4. [Sécurité](#Scurit)
+* 5. [Références](#Rfrences)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-
 ##  1. <a name='Lancerlejeu'></a>Lancer le jeu
 
 **Installer le projet**
@@ -70,9 +69,9 @@ J'ai beaucoup aimé l'expérience et je suis plutôt contente du résultat même
 
 J'espère que vous avez pris plaisir à jouer et que le degré de difficulté était correctement dosé !
 
-## Sécurité
+##  4. <a name='Scurit'></a>Sécurité
 J'utilise rate-limiter afin de protéger l'API du brute-force. Le middleware créer limite le nombre de tentatives échouées à 5 toutes les 15 minutes.
-##  4. <a name='Rfrences'></a>Références
+##  5. <a name='Rfrences'></a>Références
 - [ExpressJS](https://expressjs.com/en/)
 - [MDN web docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
 - [Geeks for geeks](https://www.geeksforgeeks.org/)
