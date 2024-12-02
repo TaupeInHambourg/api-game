@@ -52,8 +52,8 @@ function createJWT(login, isAdmin, expiration = EXPIRATION){
 }
 
 const limiterMiddleware = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 5,
+    windowMs: 60 * 1000,
+    max: 10,
     message: 'Trop de tentatives échouées. Vous pourrez réessayer dans 15 minutes.',
 });
 
