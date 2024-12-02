@@ -69,11 +69,16 @@ curl localhost:3000/
 J'ai beaucoup aimé l'expérience et je suis plutôt contente du résultat même s'il est toujours possible de faire mieux. J'ai continué d'apprendre et de mieux comprendre le fonctionnement d'une API REST et l'utilisation d'Express.JS.
 
 J'espère que vous avez pris plaisir à jouer et que le degré de difficulté était correctement dosé !
+
+## Sécurité
+J'utilise rate-limiter afin de protéger l'API du brute-force. Le middleware créer limite le nombre de tentatives échouées à 5 toutes les 15 minutes.
 ##  4. <a name='Rfrences'></a>Références
 - [ExpressJS](https://expressjs.com/en/)
 - [MDN web docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
 - [Geeks for geeks](https://www.geeksforgeeks.org/)
 - [Stack overflow](https://stackoverflow.com/)
 - [Repo Github](https://github.com/paul-schuhm/web-api) de [@paul-schuhm](https://github.com/paul-schuhm)
+- [Rate-limiter : node package](https://www.npmjs.com/package/rate-limiter-flexible)
+- [Rate-limiter : help for my case](https://reflectoring.io/tutorial-nodejs-rate-limiter/)
 - [Common Mark](https://commonmark.org/help/)
 - [Base64](https://www.base64decode.org/fr/), [URL Decoder](https://www.urldecoder.org/) et [Dcode](https://www.dcode.fr/chiffre-cesar) pour les messages codés présents dans le jeu
