@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../database');
-var { checkTokenMiddleware } = require("../jwt");
+var { checkTokenMiddleware } = require("../middlewares");
 
 /* GET gps -> page protégée. */
 router.get(
