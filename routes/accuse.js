@@ -1,11 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../database');
-var bcrypt = require('bcrypt');
-var hal = require('../hal');
-var jwt = require('../jwt');
-// var session = require('express-session');
-
+const express = require('express');
+const router = express.Router();
+const db = require('../database');
+const bcrypt = require('bcrypt');
+const hal = require('../hal');
+const jwt = require('../middlewares');
+const { limiterMiddleware } = require("../middlewares");
 
 /**
 * @param {} suspect
@@ -20,8 +19,6 @@ function identify(suspect, message) {
 
     const key = db.codes.find((code) => {
         const key = bcrypt.compareSync(message, code.key);
-        console.log(key);
-        console.log(code.key);
         return key;
     });
 
@@ -60,7 +57,7 @@ router.get('/accuse', function(req, res, next){
     res.status(200).send(`Trouvez le coupable et son message pour obtenir le code de réparation du GPS`);
 })
 
-router.post('/accuse', function(req, res, next){
+router.post('/accuse', limiterMiddleware, function(req, res, next){
     var message = req.body.message;
     const suspect = req.body.suspect;
 
@@ -70,17 +67,11 @@ router.post('/accuse', function(req, res, next){
     }
     
     if(identify(suspect, message)){
-        // req.session.failedAttempts = req.session.failedAttempts || 0;
-        // if (req.session.failedAttempts > 5) {
-        //     return res.status(403).send('Trop de tentatives échouées, veuillez réessayer plus tard.');
-        // }
 
         if(!isGuilty(suspect)){
-            req.session.failedAttempts += 1;
             res.status(401).send(`Erreur : ${suspect} n'est pas le coupable !`)
         }
         if(!isRepair(message)){
-            req.session.failedAttempts += 1;
             res.status(401).send(`Erreur : ${message} n'est pas le message de réparation !`)
         }
 
@@ -99,7 +90,6 @@ router.post('/accuse', function(req, res, next){
                 res.send(responseObject);
             }
         })
-        // req.session.failedAttempts = 0;
     }
     else{
         res.status(403).json({erreur:'Mauvais message ou suspect.', indice:'message_suspect', reponse:{

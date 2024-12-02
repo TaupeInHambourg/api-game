@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+const rateLimit = require('express-rate-limit');
 
 const EXPIRATION = '1 day';
 const SECRET = fs.readFileSync('private.key');
@@ -50,4 +51,10 @@ function createJWT(login, isAdmin, expiration = EXPIRATION){
     );
 }
 
-module.exports = {createJWT, checkTokenMiddleware}
+const limiterMiddleware = rateLimit({
+    windowMs: 60 * 1000,
+    max: 10,
+    message: 'Trop de tentatives échouées.',
+});
+
+module.exports = {createJWT, checkTokenMiddleware, limiterMiddleware}
