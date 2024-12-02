@@ -70,7 +70,7 @@ J'ai beaucoup aimé l'expérience et je suis plutôt contente du résultat même
 J'espère que vous avez pris plaisir à jouer et que le degré de difficulté était correctement dosé !
 
 ##  4. <a name='Scurit'></a>Sécurité
-J'utilise rate-limiter afin de protéger l'API du brute-force. Le middleware créer limite le nombre de tentatives échouées à 5 toutes les 15 minutes.
+J'utilise rate-limiter afin de protéger l'API du brute-force. Le middleware créé limite le nombre de tentatives échouées à 5 toutes les 15 minutes.
 ##  5. <a name='Rfrences'></a>Références
 - [ExpressJS](https://expressjs.com/en/)
 - [MDN web docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
