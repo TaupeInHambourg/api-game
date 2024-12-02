@@ -4,7 +4,6 @@ var db = require('../database');
 var bcrypt = require('bcrypt');
 var hal = require('../hal');
 var jwt = require('../jwt');
-// var session = require('express-session');
 
 
 /**
@@ -70,10 +69,6 @@ router.post('/accuse', function(req, res, next){
     }
     
     if(identify(suspect, message)){
-        // req.session.failedAttempts = req.session.failedAttempts || 0;
-        // if (req.session.failedAttempts > 5) {
-        //     return res.status(403).send('Trop de tentatives échouées, veuillez réessayer plus tard.');
-        // }
 
         if(!isGuilty(suspect)){
             req.session.failedAttempts += 1;
@@ -99,7 +94,6 @@ router.post('/accuse', function(req, res, next){
                 res.send(responseObject);
             }
         })
-        // req.session.failedAttempts = 0;
     }
     else{
         res.status(403).json({erreur:'Mauvais message ou suspect.', indice:'message_suspect', reponse:{
